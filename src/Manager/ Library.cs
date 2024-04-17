@@ -34,10 +34,20 @@ namespace library
                 return true;
             }
             return false;
-
-
         }
 
+        public User? FindUserByName(string name)
+        {
+            var userName = _users.FirstOrDefault(x => x.Name == name);
+            if (userName != null)
+            {
+                return userName;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
 
 

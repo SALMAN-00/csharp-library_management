@@ -62,15 +62,18 @@ internal class Program
         }
         Console.WriteLine("\n_______________________________________ After Delete User _______________________________________\n");
         var deleteUser = library1.DeleteUserById(user1.id);
-        if (deleteUser) Console.WriteLine("Delete successfully");
+        if (deleteUser) { Console.WriteLine("Delete successfully"); }
         IEnumerable<User> afterDelete = library1.GetUsers();
         foreach (var user in afterDelete)
         {
             Console.WriteLine($"User Name: {user.Name} Created Date: {user.createdDate} User Id: {user.id}\n");
-
         }
+        Console.WriteLine("\n_______________________________________ Find User By Name _______________________________________\n");
+        var userFindByName = library1.FindUserByName("Bob");
+        Console.WriteLine($"User Name: {userFindByName.Name} Created Date: {userFindByName.createdDate} User Id: {userFindByName.id}\n");
+
 
     }
 
-
 }
+
