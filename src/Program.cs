@@ -39,8 +39,11 @@ internal class Program
         Book book20 = new Book("Anna Karenina");
 
         Library library1 = new Library();
+
         library1.AddUser(user1);
         library1.AddUser(user2);
+        library1.AddUser(user3);
+        library1.AddUser(user4);
 
         Console.WriteLine("\n_______________________________________ All Users _______________________________________\n");
 
@@ -57,7 +60,15 @@ internal class Program
         {
             Console.WriteLine($"User Name: {sortUsers.Name} Created Date: {sortUsers.createdDate} User Id: {sortUsers.id}\n");
         }
+        Console.WriteLine("\n_______________________________________ After Delete User _______________________________________\n");
+        var deleteUser = library1.DeleteUserById(user1.id);
+        if (deleteUser) Console.WriteLine("Delete successfully");
+        IEnumerable<User> afterDelete = library1.GetUsers();
+        foreach (var user in afterDelete)
+        {
+            Console.WriteLine($"User Name: {user.Name} Created Date: {user.createdDate} User Id: {user.id}\n");
 
+        }
 
     }
 

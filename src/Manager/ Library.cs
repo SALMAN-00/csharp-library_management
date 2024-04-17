@@ -25,6 +25,18 @@ namespace library
             return sortUsers;
         }
 
+        public bool DeleteUserById(Guid id)
+        {
+            var userFound = _users.FirstOrDefault(user => user.id == id);
+            if (userFound != null)
+            {
+                _users = _users.Where(x => x.id != id);
+                return true;
+            }
+            return false;
+
+
+        }
 
 
 
