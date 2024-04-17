@@ -48,8 +48,18 @@ namespace library
                 return null;
             }
         }
-
-
-
+        public IEnumerable<User> UserPagination(int PageNumber)
+        {
+            if (PageNumber > 0 && PageNumber < 3)
+            {
+                int RecordsPerPage = 5;
+                var user = _users.Skip((PageNumber - 1) * RecordsPerPage).Take(RecordsPerPage).ToList();
+                return user;
+            }
+            else
+            {
+                throw new Exception("page number should be greater than 0 and less than 3");
+            }
+        }
     }
 }

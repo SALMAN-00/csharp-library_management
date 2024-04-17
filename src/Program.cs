@@ -44,6 +44,13 @@ internal class Program
         library1.AddUser(user2);
         library1.AddUser(user3);
         library1.AddUser(user4);
+        library1.AddUser(user5);
+        library1.AddUser(user6);
+        library1.AddUser(user7);
+        library1.AddUser(user8);
+        library1.AddUser(user9);
+        library1.AddUser(user10);
+
 
         Console.WriteLine("\n_______________________________________ All Users _______________________________________\n");
 
@@ -72,6 +79,13 @@ internal class Program
         var userFindByName = library1.FindUserByName("Bob");
         Console.WriteLine($"User Name: {userFindByName.Name} Created Date: {userFindByName.createdDate} User Id: {userFindByName.id}\n");
 
+        Console.WriteLine("\n_______________________________________ User pagination _______________________________________\n");
+        var pagination = library1.UserPagination(1);
+        foreach (var page in pagination)
+        {
+            Console.WriteLine($"User Name: {page.Name} Created Date: {page.createdDate} User Id: {page.id}\n");
+
+        }
 
     }
 
