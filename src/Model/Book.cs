@@ -9,7 +9,7 @@ namespace library
     public class Book : BaseEntity
     {
         public string Title { get; set; }
-
+ 
         public Book(string title, DateTime? createdDate = null) : base(createdDate)
         {
 
