@@ -7,8 +7,9 @@ internal class Program
 
         Manager<Book> BookFactory = new Manager<Book>();
         Manager<User> UserFactory = new Manager<User>();
-        
+
         Library library1 = new Library(UserFactory, BookFactory);
+        
         var UserManager = library1.UesrManager();
         var BookManager = library1.BookManager();
 
