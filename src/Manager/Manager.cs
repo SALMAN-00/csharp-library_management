@@ -25,7 +25,7 @@ namespace library
             return sortItems;
         }
 
-        public bool DeleteOne(Guid id)
+        public bool DeleteById(Guid id)
         {
             var found = _item.FirstOrDefault(item => item.id == id);
             if (found != null)
@@ -36,17 +36,17 @@ namespace library
             return false;
         }
 
-        public T? FindOne(T item)
+        public T? FindOne(string item)
         {
-            if (item.GetType() == typeof(Book))
+            var book = _item.FirstOrDefault(x => x is Book && (x as Book).Title == item);
+            if (book != null)
             {
-                Book temp = item as Book;
-                return _item.FirstOrDefault(x => (x as Book)?.Title == temp.Title);
+                return (T)Convert.ChangeType(book, typeof(T));
             }
-            else if (item.GetType() == typeof(User))
+            var user = _item.FirstOrDefault(x => x is User && (x as User).Name == item);
+            if (user != null)
             {
-                User temp = item as User;
-                return _item.FirstOrDefault(x => (x as User)?.Name == temp.Name);
+                return (T)Convert.ChangeType(user, typeof(T));
             }
             else throw new Exception("Not Found Title of the Book or Name of the user");
         }

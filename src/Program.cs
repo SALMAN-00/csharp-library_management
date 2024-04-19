@@ -5,6 +5,8 @@ internal class Program
     private static void Main()
     {
 
+        Manager<Book> BookManager = new Manager<Book>();
+        Manager<User> UserManager = new Manager<User>();
         // Program.cs - You can also change these sample codes to adapt to your design
         User user1 = new User("Alice", new DateTime(2023, 1, 1));
         User user2 = new User("Bob", new DateTime(2023, 2, 1));
@@ -38,55 +40,109 @@ internal class Program
         Book book19 = new Book("The Iliad");
         Book book20 = new Book("Anna Karenina");
 
-        Library library1 = new Library();
 
-        library1.AddUser(user1);
-        library1.AddUser(user2);
-        library1.AddUser(user3);
-        library1.AddUser(user4);
-        library1.AddUser(user5);
-        library1.AddUser(user6);
-        library1.AddUser(user7);
-        library1.AddUser(user8);
-        library1.AddUser(user9);
-        library1.AddUser(user10);
+        UserManager.AddOne(user1);
+        UserManager.AddOne(user2);
+        UserManager.AddOne(user3);
+        UserManager.AddOne(user4);
+        UserManager.AddOne(user5);
+        UserManager.AddOne(user6);
+        UserManager.AddOne(user7);
+        UserManager.AddOne(user8);
+        UserManager.AddOne(user9);
+        UserManager.AddOne(user10);
 
+
+        BookManager.AddOne(book1);
+        BookManager.AddOne(book2);
+        BookManager.AddOne(book3);
+        BookManager.AddOne(book4);
+        BookManager.AddOne(book5);
+        BookManager.AddOne(book6);
+        BookManager.AddOne(book7);
+        BookManager.AddOne(book8);
+        BookManager.AddOne(book9);
+        BookManager.AddOne(book10);
+        BookManager.AddOne(book11);
+        BookManager.AddOne(book12);
+        BookManager.AddOne(book13);
+        BookManager.AddOne(book14);
+        BookManager.AddOne(book15);
+        BookManager.AddOne(book16);
+        BookManager.AddOne(book17);
+        BookManager.AddOne(book18);
+        BookManager.AddOne(book19);
+        BookManager.AddOne(book20);
 
         Console.WriteLine("\n_______________________________________ All Users _______________________________________\n");
 
-        IEnumerable<User> getAllUsers = library1.GetUsers();
+        var getAllUsers = UserManager.GetAll();
         foreach (var user in getAllUsers)
         {
-            Console.WriteLine($"User Name: {user.Name} Created Date: {user.createdDate} User Id: {user.id}\n");
+            Console.WriteLine($"User Name: {user.Name} | Created Date: {user.createdDate} | User Id: {user.id}\n");
 
         }
         Console.WriteLine("\n_______________________________________ Sort All Users By Create Date _______________________________________\n");
 
-        IEnumerable<User> sortUserByDate = library1.SortedByDate();
+        var sortUserByDate = UserManager.SortedByDate();
         foreach (var sortUsers in sortUserByDate)
         {
-            Console.WriteLine($"User Name: {sortUsers.Name} Created Date: {sortUsers.createdDate} User Id: {sortUsers.id}\n");
+            Console.WriteLine($"User Name: {sortUsers.Name} | Created Date: {sortUsers.createdDate} | User Id: {sortUsers.id}\n");
         }
         Console.WriteLine("\n_______________________________________ After Delete User _______________________________________\n");
-        var deleteUser = library1.DeleteUserById(user1.id);
+        var deleteUser = UserManager.DeleteById(user1.id);
         if (deleteUser) { Console.WriteLine("Delete successfully"); }
-        IEnumerable<User> afterDelete = library1.GetUsers();
+        var afterDelete = UserManager.GetAll();
         foreach (var user in afterDelete)
         {
-            Console.WriteLine($"User Name: {user.Name} Created Date: {user.createdDate} User Id: {user.id}\n");
+            Console.WriteLine($"User Name: {user.Name} | Created Date: {user.createdDate} | User Id: {user.id}\n");
         }
         Console.WriteLine("\n_______________________________________ Find User By Name _______________________________________\n");
-        var userFindByName = library1.FindUserByName("Bob");
-        Console.WriteLine($"User Name: {userFindByName.Name} Created Date: {userFindByName.createdDate} User Id: {userFindByName.id}\n");
+        var userFindByName = UserManager.FindOne("Bob");
+        Console.WriteLine($"User Name: {userFindByName.Name} | Created Date: {userFindByName.createdDate} | User Id: {userFindByName.id}\n");
 
         Console.WriteLine("\n_______________________________________ User pagination _______________________________________\n");
-        var pagination = library1.UserPagination(1);
+        var pagination = UserManager.Pagination(1);
         foreach (var page in pagination)
         {
-            Console.WriteLine($"User Name: {page.Name} Created Date: {page.createdDate} User Id: {page.id}\n");
+            Console.WriteLine($"User Name: {page.Name} | Created Date: {page.createdDate} | User Id: {page.id}\n");
 
         }
 
+        Console.WriteLine("\n_______________________________________ All Books _______________________________________\n");
+        var allBooks = BookManager.GetAll();
+        foreach (var book in allBooks)
+        {
+            Console.WriteLine($"Book Title: {book.Title} | Created Date: {book.createdDate} | Book Id: {book.id}\n");
+
+        }
+        Console.WriteLine("\n_______________________________________ Sort All Books By Create Date _______________________________________\n");
+        var sort = BookManager.SortedByDate();
+        foreach (var book in sort)
+        {
+            Console.WriteLine($"Book Title: {book.Title} | Created Date: {book.createdDate} | Book Id: {book.id}\n");
+
+        }
+        Console.WriteLine("\n_______________________________________ After Delete Book _______________________________________\n");
+        var delete = BookManager.DeleteById(book1.id);
+        if (delete) { Console.WriteLine("Delete successfully"); }
+        var afterDeleteBook = BookManager.GetAll();
+        foreach (var book in afterDeleteBook)
+        {
+            Console.WriteLine($"Book Title: {book.Title} | Created Date: {book.createdDate} | Book Id: {book.id}\n");
+
+        }
+        Console.WriteLine("\n_______________________________________ Find Book By Title _______________________________________\n");
+        var findBook = BookManager.FindOne("1984");
+        Console.WriteLine($"Book Title: {findBook.Title} | Created Date: {findBook.createdDate} | Book Id: {findBook.id}\n");
+
+        Console.WriteLine("\n_______________________________________ Book pagination _______________________________________\n");
+        var bookPagination = BookManager.Pagination(1);
+        foreach (var page in bookPagination)
+        {
+            Console.WriteLine($"Book Title: {page.Title} | Created Date: {page.createdDate} | Book Id: {page.id}\n");
+
+        }
     }
 
 }
