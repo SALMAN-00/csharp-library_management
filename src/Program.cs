@@ -5,9 +5,14 @@ internal class Program
     private static void Main()
     {
 
-        Manager<Book> BookManager = new Manager<Book>();
-        Manager<User> UserManager = new Manager<User>();
-        // Program.cs - You can also change these sample codes to adapt to your design
+        Manager<Book> BookFactory = new Manager<Book>();
+        Manager<User> UserFactory = new Manager<User>();
+        
+        Library library1 = new Library(UserFactory, BookFactory);
+        var UserManager = library1.UesrManager();
+        var BookManager = library1.BookManager();
+
+
         User user1 = new User("Alice", new DateTime(2023, 1, 1));
         User user2 = new User("Bob", new DateTime(2023, 2, 1));
         User user3 = new User("Charlie", new DateTime(2023, 3, 1));
