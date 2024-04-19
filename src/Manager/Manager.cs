@@ -38,15 +38,17 @@ namespace library
 
         public T? FindOne(T item)
         {
-            var findItem = _item.FirstOrDefault(x => x.id == item.id);
-            if (findItem != null)
+            if (item.GetType() == typeof(Book))
             {
-                return findItem;
+                Book temp = item as Book;
+                return _item.FirstOrDefault(x => (x as Book)?.Title == temp.Title);
             }
-            else
+            else if (item.GetType() == typeof(User))
             {
-                return null;
+                User temp = item as User;
+                return _item.FirstOrDefault(x => (x as User)?.Name == temp.Name);
             }
+            else throw new Exception("Not Found Title of the Book or Name of the user");
         }
         public IEnumerable<T> Pagination(int PageNumber)
         {
