@@ -7,7 +7,7 @@ namespace library
 {
     public interface INotificationService
     {
-        public void SendNotificationOnSucess();
-        public void SendNotificationOnFailure();
+        public void SendNotificationOnSucess(string itemType,string itemName);
+        public void SendNotificationOnFailure(string itemType, string itemName);
     }
 }

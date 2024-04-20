@@ -4,12 +4,12 @@ internal class Program
 {
     private static void Main()
     {
+        var emailService = new EmailNotificationService();
 
-        Manager<Book> BookFactory = new Manager<Book>();
-        Manager<User> UserFactory = new Manager<User>();
+        Manager<Book> BookFactory = new Manager<Book>(emailService);
+        Manager<User> UserFactory = new Manager<User>(emailService);
 
         Library library1 = new Library(UserFactory, BookFactory);
-        
         var UserManager = library1.UesrManager();
         var BookManager = library1.BookManager();
 
@@ -47,38 +47,39 @@ internal class Program
         Book book20 = new Book("Anna Karenina");
 
 
-        UserManager.AddOne(user1);
-        UserManager.AddOne(user2);
-        UserManager.AddOne(user3);
-        UserManager.AddOne(user4);
-        UserManager.AddOne(user5);
-        UserManager.AddOne(user6);
-        UserManager.AddOne(user7);
-        UserManager.AddOne(user8);
-        UserManager.AddOne(user9);
-        UserManager.AddOne(user10);
+        UserManager.AddItem(user1);
+        UserManager.AddItem(user2);
+        UserManager.AddItem(user3);
+        UserManager.AddItem(user4);
+        UserManager.AddItem(user5);
+        UserManager.AddItem(user6);
+        UserManager.AddItem(user7);
+        UserManager.AddItem(user8);
+        UserManager.AddItem(user9);
+        UserManager.AddItem(user10);
+        UserManager.AddItem(user10);
 
-
-        BookManager.AddOne(book1);
-        BookManager.AddOne(book2);
-        BookManager.AddOne(book3);
-        BookManager.AddOne(book4);
-        BookManager.AddOne(book5);
-        BookManager.AddOne(book6);
-        BookManager.AddOne(book7);
-        BookManager.AddOne(book8);
-        BookManager.AddOne(book9);
-        BookManager.AddOne(book10);
-        BookManager.AddOne(book11);
-        BookManager.AddOne(book12);
-        BookManager.AddOne(book13);
-        BookManager.AddOne(book14);
-        BookManager.AddOne(book15);
-        BookManager.AddOne(book16);
-        BookManager.AddOne(book17);
-        BookManager.AddOne(book18);
-        BookManager.AddOne(book19);
-        BookManager.AddOne(book20);
+        BookManager.AddItem(book1);
+        BookManager.AddItem(book2);
+        BookManager.AddItem(book3);
+        BookManager.AddItem(book4);
+        BookManager.AddItem(book5);
+        BookManager.AddItem(book6);
+        BookManager.AddItem(book7);
+        BookManager.AddItem(book8);
+        BookManager.AddItem(book9);
+        BookManager.AddItem(book10);
+        BookManager.AddItem(book11);
+        BookManager.AddItem(book12);
+        BookManager.AddItem(book13);
+        BookManager.AddItem(book14);
+        BookManager.AddItem(book15);
+        BookManager.AddItem(book16);
+        BookManager.AddItem(book17);
+        BookManager.AddItem(book18);
+        BookManager.AddItem(book19);
+        BookManager.AddItem(book20);
+        BookManager.AddItem(book20);
 
         Console.WriteLine("\n_______________________________________ All Users _______________________________________\n");
 
@@ -96,15 +97,14 @@ internal class Program
             Console.WriteLine($"User Name: {sortUsers.Name} | Created Date: {sortUsers.createdDate} | User Id: {sortUsers.id}\n");
         }
         Console.WriteLine("\n_______________________________________ After Delete User _______________________________________\n");
-        var deleteUser = UserManager.DeleteById(user1.id);
-        if (deleteUser) { Console.WriteLine("Delete successfully"); }
+        UserManager.DeleteById(user1.id);
         var afterDelete = UserManager.GetAll();
         foreach (var user in afterDelete)
         {
             Console.WriteLine($"User Name: {user.Name} | Created Date: {user.createdDate} | User Id: {user.id}\n");
         }
         Console.WriteLine("\n_______________________________________ Find User By Name _______________________________________\n");
-        var userFindByName = UserManager.FindOne("Bob");
+        var userFindByName = UserManager.FindItem("Bob");
         Console.WriteLine($"User Name: {userFindByName.Name} | Created Date: {userFindByName.createdDate} | User Id: {userFindByName.id}\n");
 
         Console.WriteLine("\n_______________________________________ User pagination _______________________________________\n");
@@ -130,8 +130,7 @@ internal class Program
 
         }
         Console.WriteLine("\n_______________________________________ After Delete Book _______________________________________\n");
-        var delete = BookManager.DeleteById(book1.id);
-        if (delete) { Console.WriteLine("Delete successfully"); }
+        BookManager.DeleteById(book1.id);
         var afterDeleteBook = BookManager.GetAll();
         foreach (var book in afterDeleteBook)
         {
@@ -139,7 +138,7 @@ internal class Program
 
         }
         Console.WriteLine("\n_______________________________________ Find Book By Title _______________________________________\n");
-        var findBook = BookManager.FindOne("1984");
+        var findBook = BookManager.FindItem("1984");
         Console.WriteLine($"Book Title: {findBook.Title} | Created Date: {findBook.createdDate} | Book Id: {findBook.id}\n");
 
         Console.WriteLine("\n_______________________________________ Book pagination _______________________________________\n");

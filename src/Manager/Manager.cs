@@ -8,10 +8,49 @@ namespace library
     public class Manager<T> where T : BaseEntity
     {
         private IEnumerable<T> _item = [];
+        private EmailNotificationService _emailNotificationService;
 
-        public void AddOne(T item)
+        public Manager(EmailNotificationService emailNotificationService)
         {
-            _item = _item.Append(item);
+            _emailNotificationService = emailNotificationService;
+        }
+
+        public void AddItem(T item)
+        {
+            if (item.GetType() == typeof(Book))
+            {
+                var temp = item as Book;
+                var findBook = _item.FirstOrDefault(x => x is Book && (x as Book)?.Title == temp.Title);
+                if (findBook == null)
+                {
+                    _emailNotificationService.SendNotificationOnSucess("book titled", temp.Title);
+                    _item = _item.Append(item);
+
+                }
+                else if (findBook != null)
+                {
+                    _emailNotificationService.SendNotificationOnFailure("book titled", temp.Title);
+
+                }
+            }
+            else if (item.GetType() == typeof(User))
+            {
+                var temp = item as User;
+                var findUser = _item.FirstOrDefault(x => x is User && (x as User)?.Name == temp.Name);
+                if (findUser == null)
+                {
+                    _emailNotificationService.SendNotificationOnSucess("User Name", temp.Name);
+                    _item = _item.Append(item);
+
+                }
+                else if (findUser != null)
+                {
+                    _emailNotificationService.SendNotificationOnFailure("User Name", temp.Name);
+
+                }
+
+            }
+            else throw new Exception($"can't added becuse its not Book or User");
         }
 
         public IEnumerable<T> GetAll()
@@ -25,18 +64,21 @@ namespace library
             return sortItems;
         }
 
-        public bool DeleteById(Guid id)
+        public void DeleteById(Guid id)
         {
             var found = _item.FirstOrDefault(item => item.id == id);
             if (found != null)
             {
                 _item = _item.Where(item => item.id != id);
-                return true;
+                Console.WriteLine($"has ben Deleted this id : {id}");;
             }
-            return false;
+            else {
+                           Console.WriteLine($"Not found this id :{id}");;
+
+            }
         }
 
-        public T? FindOne(string item)
+        public T? FindItem(string item)
         {
             var book = _item.FirstOrDefault(x => x is Book && (x as Book).Title == item);
             if (book != null)
