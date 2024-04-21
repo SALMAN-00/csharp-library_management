@@ -9,7 +9,7 @@ internal class Program
         Manager<User> UserFactory1 = new Manager<User>(emailService);
 
         Library library1 = new Library(UserFactory1, BookFactory1);
-        var UserManager1 = library1.UesrManager();
+        var UserManager1 = library1.UserManager();
         var BookManager1 = library1.BookManager();
 
 
@@ -18,7 +18,7 @@ internal class Program
         Manager<User> UserFactory2 = new Manager<User>(smsService);
 
         Library library2 = new Library(UserFactory2, BookFactory2);
-        var UserManager2 = library2.UesrManager();
+        var UserManager2 = library2.UserManager();
         var BookManager2 = library2.BookManager();
 
 
@@ -199,25 +199,6 @@ internal class Program
             Console.WriteLine($"Book Title: {page.Title} | Created Date: {page.createdDate} | Book Id: {page.id}\n");
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         Console.ForegroundColor = ConsoleColor.Blue;

@@ -21,7 +21,7 @@ namespace library
             return _bookManager;
         }
 
-        public Manager<User> UesrManager()
+        public Manager<User> UserManager()
         {
             return _userManager;
         }

@@ -15,10 +15,7 @@ namespace library
             _notificationService = notificationService;
         }
 
-        // public Manager(SMSNotificationService smsNotificationService)
-        // {
-        //     _smsNotificationService = smsNotificationService;
-        // }
+
         public void AddItem(T item)
         {
             if (item.GetType() == typeof(Book))
